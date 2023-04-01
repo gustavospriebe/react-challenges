@@ -1,6 +1,6 @@
 import React from "react";
 
-const Summary = () => {
+const Summary = ({ cart }) => {
     return (
         <>
             <div className="box">
@@ -8,7 +8,18 @@ const Summary = () => {
                 <div className="info">
                     <div>
                         <span>Sub-total</span>
-                        <span>R$ 418</span>
+                        <span>
+                            {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                            }).format(
+                                cart.reduce(
+                                    (acc, item) =>
+                                        acc + item.price * item.quantity,
+                                    0
+                                )
+                            )}
+                        </span>
                     </div>
                     <div>
                         <span>Frete</span>
@@ -23,7 +34,17 @@ const Summary = () => {
                 </div>
                 <footer>
                     <span>Total</span>
-                    <span>R$ 418</span>
+                    <span>
+                        {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                        }).format(
+                            cart.reduce(
+                                (acc, item) => acc + item.price * item.quantity,
+                                0
+                            )
+                        )}
+                    </span>
                 </footer>
             </div>
             <button>Finalizar Compra</button>

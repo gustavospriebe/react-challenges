@@ -1,14 +1,6 @@
 /*
 ? DESAFIO - Shopping Cart:
 
-Você deve desenvolver um carrinho de compras funcional.
-Funcionalidades que esperamos que você desenvolva:
-
-todo - inserção de novos produtos no carrinho
-todo - remoção de produtos já inseridos
-todo - alteração de quantidade de cada item 
-todo - cálculo do preço total dos itens inseridos
-
 todo - FUNCIONALIDADE EXTRA: aplicação de cupom de desconto
 */
 import "./styles.scss";
@@ -18,7 +10,6 @@ import { PageTitle } from "./layout/PageTitle";
 import Summary from "./Summary";
 import TableRow from "./TableRow";
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { api } from "./provider";
 
 function randomNumber(min, max) {
@@ -26,10 +17,22 @@ function randomNumber(min, max) {
 }
 
 function App() {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([
+        {
+            name: "produto",
+            category: "categoria",
+            price: randomNumber(100, 2000),
+            quantity: 2,
+        },
+        {
+            name: "produto",
+            category: "categoria",
+            price: randomNumber(100, 2000),
+            quantity: 1,
+        },
+    ]);
 
     const product = {
-        id: uuidv4(),
         name: "produto",
         category: "categoria",
         price: randomNumber(100, 2000),
@@ -107,7 +110,7 @@ function App() {
                             <tbody>
                                 {cart.map((item) => (
                                     <TableRow
-                                        key={item?.id}
+                                        key={item?._id}
                                         data={item}
                                         deleteProduct={deleteProduct}
                                         updateProduct={updateProduct}
@@ -125,7 +128,7 @@ function App() {
                         </table>
                     </section>
                     <aside>
-                        <Summary />
+                        <Summary cart={cart} />
                     </aside>
                 </div>
             </main>

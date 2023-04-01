@@ -1,8 +1,6 @@
 import React from "react";
 
-const TableRow = ({ data, deleteProduct }) => {
-    console.log(data);
-
+const TableRow = ({ data, deleteProduct, updateProduct }) => {
     return (
         <tr>
             <td>
@@ -14,7 +12,12 @@ const TableRow = ({ data, deleteProduct }) => {
                     </div>
                 </div>
             </td>
-            <td>R$ {data.price}</td>
+            <td>
+                {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                }).format(data.price)}
+            </td>
             <td>
                 <div className="qty">
                     <button>
@@ -32,7 +35,12 @@ const TableRow = ({ data, deleteProduct }) => {
                     </button>
                 </div>
             </td>
-            <td>R$ {data.price * data.quantity}</td>
+            <td>
+                {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                }).format(data.price * data.quantity)}
+            </td>
             <td>
                 <button className="remove" onClick={() => deleteProduct(data)}>
                     <i className="bx bx-x"></i>
