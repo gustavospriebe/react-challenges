@@ -66,7 +66,7 @@ function App() {
     }
 
     function updateProduct(item, action) {
-        const newQuantity = item.quantity;
+        let newQuantity = item.quantity;
 
         if (action === "decrease") {
             if (newQuantity === 1) {
@@ -80,6 +80,8 @@ function App() {
         }
 
         const updatedCart = { ...item, quantity: newQuantity };
+
+        console.log(newQuantity);
 
         api.put(`/cart/${item._id}`, updatedCart).then((response) => {
             console.log(response);

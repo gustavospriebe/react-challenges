@@ -26,7 +26,7 @@ const TableRow = ({ data, deleteProduct, updateProduct }) => {
                             onClick={() => updateProduct(data, "decrease")}
                         ></i>
                     </button>
-                    <span>2</span>
+                    <span>{data.quantity}</span>
                     <button>
                         <i
                             className="bx bx-plus"
